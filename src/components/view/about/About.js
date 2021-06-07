@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import {changeNameAction, addWishAction} from '../redux/actions/myAction'
+import {changeNameAction, addWishAction} from '../../../redux/actions/myAction'
 
 const About = (props) => {
     const myWishes = props.myWish.map(item => {
@@ -8,7 +8,7 @@ const About = (props) => {
         });
     return (
         <div>
-            <h1 className="text-center text-danger">My name is {props.name}</h1>
+            <h1 className="text-center text-danger">My name is {props.name} and sirname is {props.obj.sirname} and roll {props.obj.roll}</h1>
             <h1 className="text-center text-danger">This is {props.namePage} Component</h1>
             {myWishes}
             <button className="btn btn-block btn-info" onClick={() => {props.changeName()}}> Change</button>

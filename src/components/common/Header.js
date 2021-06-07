@@ -27,6 +27,7 @@ const Header = () => {
                         <NavLink to={`${match.url}/mens`} style={mystyle}>mens</NavLink>
                         <NavLink to={`${match.url}/kids`} style={mystyle}>Kids</NavLink>
                         <NavLink to={`${match.url}/test`} style={mystyle}>Test</NavLink>
+                        <NavLink to={`${match.url}/practice`} style={mystyle}>Practice</NavLink>
                     </Nav>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2"/>

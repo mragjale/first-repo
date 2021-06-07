@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import appData from './dataModal/ApplicationData'
-import Card from "./Card";
+import appData from '../../dataModal/ApplicationData'
+import Card from '../ganeral/Card';
+
 
 const Home = () => {
     const [persons, setPersons] = useState([])

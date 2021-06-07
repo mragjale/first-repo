@@ -1,21 +1,24 @@
-import React from "react";
+import React from 'react';
 import {useParams} from 'react-router-dom';
-import About from "./About";
-import Womens from "./Womens";
-import Mens from "./Mens";
-import Kids from "./Kidas";
-import Contact from "./Contact";
-import Home from "./Home";
-import Test from "./Test";
+import Home from '../home/Home';
+import About from '../about/About';
+import Contact from '../contact/Contact';
+import Womens from '../ganeral/Womens';
+import Mens from '../ganeral/Mens';
+import Kids from '../ganeral/Kidas';
+import Test from '../ganeral/Test';
+import Practice from '../ganeral/Practice';
+
 const Dashboard = () => {
     let {pageName} = useParams();
     let show;
+    // const obj = {sirname:'Mragjale'}
     switch (pageName) {
         case '/':
             show = <Home/>
             break;
         case 'about':
-            show = <About/>
+            show = <About obj={{sirname:'Mragjale', roll: 12}}/>
             break;
         case 'contact':
             show = <Contact/>
@@ -24,13 +27,16 @@ const Dashboard = () => {
             show = <Womens/>
             break;
         case 'mens':
-            show = <Mens/>
+            show = <Mens name={()=><h1>Nnamdi Chidume <p>kuch</p></h1>}/>
             break;
         case 'kids':
             show = <Kids/>
             break;
         case 'test':
             show = <Test/>
+            break;
+            case 'practice':
+            show = <Practice/>
             break;
         default: show = <Home/>
     }

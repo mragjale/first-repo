@@ -1,0 +1,15 @@
+.month-calendar{
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(7, auto);
+        /*padding: 10px;*/
+        .grid-item {
+            color: black;
+            font-size: 1.3rem;
+            /*border: 1px solid #cccccc;*/
+            padding: 5px;
+            cursor: pointer;
+            background-color: white;
+        }
+    }
+} 
