@@ -1,18 +1,15 @@
 import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import './App.css';
-<<<<<<< HEAD
 import Container from "./components/view/ganeral/Container";
 import Login from "./components/view/login/Login";
-=======
-import Container from "./components/Container";
-import Login from "./components/Login";
->>>>>>> 74107a354c97d9fa8b88f6164d2911aa2da67787
+
 
 function App() {
     return (
             <div>
                 <BrowserRouter>
+                
                     {/*<ul>
                         <li>
                             <Link to="/">About</Link>

@@ -7,6 +7,7 @@ const About = (props) => {
             return <h3 key={Math.random()}>{item}</h3>
         });
     return (
+        
         <div>
             <h1 className="text-center text-danger">My name is {props.name} and sirname is {props.obj.sirname} and roll {props.obj.roll}</h1>
             <h1 className="text-center text-danger">This is {props.namePage} Component</h1>

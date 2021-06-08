@@ -7,8 +7,10 @@ const About = (props) => {
             return <h3 key={Math.random()}>{item}</h3>
         });
     return (
+
         <div>
-            <h1 className="text-center text-danger">My name is {props.name}</h1>
+            <h1 className="text-center text-danger">My name is
+             {props.name}</h1>
             <h1 className="text-center text-danger">This is {props.namePage} Component</h1>
             {myWishes}
             <button className="btn btn-block btn-info" onClick={() => {props.changeName()}}> Change</button>
