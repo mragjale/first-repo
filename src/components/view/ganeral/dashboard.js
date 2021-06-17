@@ -8,6 +8,8 @@ import Mens from '../ganeral/Mens';
 import Kids from '../ganeral/Kidas';
 import Test from '../ganeral/Test';
 import Practice from '../ganeral/Practice';
+import Diagrams from './Diagrams';
+import FlowDiagrams from './FlowDiagram';
 
 const Dashboard = () => {
     let {pageName} = useParams();
@@ -38,6 +40,12 @@ const Dashboard = () => {
             case 'practice':
             show = <Practice/>
             break;
+            case 'diagrams':
+                show = <Diagrams/>
+                break;
+                case 'flowDiagrams':
+                    show = <FlowDiagrams/>
+                    break;
         default: show = <Home/>
     }
     return(
