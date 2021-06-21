@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Diagram, { createSchema, useSchema } from 'beautiful-react-diagrams';
 import 'beautiful-react-diagrams/styles.css';
 import '../../../styles/Contact.scss';
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+// import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Kids from '../ganeral/Kidas';
 
 // const initialSchema = createSchema({
 //   nodes: [
@@ -45,7 +45,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
         <div style={{padding: '15px'}}>
           {content} 
         </div>
-        <div style={{marginTop: '10px',display:'flex', justifyContent:'space-between'}}> <i className="fas fa-arrow-right"></i> <FontAwesomeIcon icon={faArrowRight} />
+        <div style={{marginTop: '10px',display:'flex', justifyContent:'space-between'}}> 
+        {/* <i className="fas fa-arrow-right"></i> <FontAwesomeIcon icon={faArrowRight} /> */}
           {inputs.map((port) => React.cloneElement(port, {style: { width: '25px', height: '25px', background: '#1B263B' },
           className: "fas fa-arrow-right"}, ))}
           {outputs.map((port) => React.cloneElement(port, {style: { width: '25px', height: '25px', background: '#1B263B' }}))}
@@ -81,15 +82,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
   ]
         }
   );
-  const [schema, { onChange, addNode, removeNode }] = useSchema(initialSchema);
-  const  [label, setLabel] = useState('');
+  const [schema, { onChange, addNode, removeNode, onSelect, connect}] = useSchema(initialSchema);
+  // const  [label, setLabel] = useState({input: '', output: '', label: ''});
  
-const saveSchema = () => {
+const saveSchema = (e) => {
+  e.preventDefault();
   console.log('save schema', schema);
   // schema.links.forEach(link => {
   //   link.label = link.selected;
   // });
 localStorage.setItem('schema', JSON.stringify(schema));
+}
+function show(e) {
+  console.log('xvxvcxvxcvxcvxcvxcvxcvxvcxvxvxcv', e);
 }
   const addNewNode = useCallback (
     (e) =>  {
@@ -104,18 +109,26 @@ localStorage.setItem('schema', JSON.stringify(schema));
        render: CustomRender,
        data: {onClick: deleteNodeFromSchema},
        inputs: [{ id: `port-${Math.random()}`, canLink: show}],
-       outputs: [{ id: `port-${Math.random()}`}],
+       outputs: [{ id: `port-${Math.random()}`, canLink: show}],
    };
    
    addNode(nextNode);
   }, [CustomRender, addNode, deleteNodeFromSchema, schema]
   );
-  function show() {
-    console.log('xvxvcxvxcvxcvxcvxcvxcvxvcxvxvxcv');
-  }
-  const linkRender = () => (
+
+  // const handleChange = (e, link) => {
+  //   // onChange(schema)
+  //   // link.label = e.target.value
+  //   // onSelect()
+  //   // connect({...label, label: e.target.value})
+  //   // setLabel(label);
+  // console.log(e, link);
+  // };
+  const linkRender = (link) => (
     <div style={{background: 'purple'}}>
-  <select id="cars" name="cars" onChange={handleChange}>
+  <select id="cars" name="cars" value={link.selected} onChange={(e) => {link.label =  link.label ? link.label : e.target.value;
+  link.selected =  link.selected ? link.selected : e.target.value;}}>
+  <option value="">Select</option>
   <option value="volvo">Volvo</option>
   <option value="saab">Saab</option>
   <option value="fiat">Fiat</option>
@@ -123,31 +136,28 @@ localStorage.setItem('schema', JSON.stringify(schema));
 </select>
     </div>
 );
-const handleChange = (e) => {
-  setLabel(e.target.value);
-console.log(e.target.value);
-}
+
   const handleSaveChange = useCallback(() => {
 
     if (schema && schema.links) {
       schema.links.forEach((link) => {
-      
-    link.label = linkRender()
-    link.selected = label;
+        // setLabel({input: link.input, output: link.output, label: ''});
+        // link.label = <Kids handleChange={handleChange} label={label}></Kids>
+        link.label = linkRender(link)
+    // link.selected = label;
+  
       });
     }
     //return onChange(schema);
-  }, [schema, label]);
+  }, [schema.links]);
   useEffect(() => {
     handleSaveChange();
-  });
-  // useEffect(() => {
-  //   setInitialSchema(JSON.parse(localStorage.getItem('schema')))
-  // }, []);
+  }, [schema.links]);
+  const onConnect = useCallback(() => {}, []);
   return (
     <div style={{ height: '22.5rem' }}>
       <button   color="primary" icon="plus" onClick={addNewNode}>Add new node</button>
-      <Diagram schema={schema} onChange={onChange} />
+      <Diagram schema={schema} onChange={onChange} connect={onConnect}/>
       <button onClick={saveSchema}>Save</button>
     </div>
   );
